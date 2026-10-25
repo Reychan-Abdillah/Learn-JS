@@ -1,0 +1,212 @@
+# My Problem — JavaScript Practice Challenge
+
+## Challenge: Analisis Data Penjualan Toko
+
+**Level:** Menengah  
+**Materi:** Function, Parameters & Arguments, Return, Scope, Callback, `setTimeout()`, `forEach()`, `map()`, `filter()`, `find()`, `findIndex()`, `findLast()`, `findLastIndex()`.
+
+### Studi Kasus
+
+Kamu diminta membuat program sederhana untuk menganalisis data penjualan sebuah toko. Program harus dapat menampilkan data transaksi, menghitung total pendapatan, memfilter transaksi tertentu, serta mencari transaksi berdasarkan kondisi.
+
+Gunakan data berikut:
+
+```js
+const transaksi = [
+    { id: 1, produk: "Keyboard", harga: 250000, jumlah: 2, status: "lunas" },
+    { id: 2, produk: "Mouse", harga: 100000, jumlah: 3, status: "belum lunas" },
+    { id: 3, produk: "Monitor", harga: 1500000, jumlah: 1, status: "lunas" },
+    { id: 4, produk: "Headset", harga: 350000, jumlah: 2, status: "lunas" },
+    { id: 5, produk: "Mouse", harga: 100000, jumlah: 1, status: "belum lunas" },
+    { id: 6, produk: "Keyboard", harga: 250000, jumlah: 1, status: "lunas" },
+    { id: 7, produk: "Webcam", harga: 450000, jumlah: 2, status: "belum lunas" }
+];
+```
+
+---
+
+## Tugas 1 — Function, Parameters, Arguments, dan Return
+
+Buat fungsi `hitungSubtotal()` yang menerima dua parameter:
+
+- `harga`
+- `jumlah`
+
+Fungsi harus mengembalikan hasil perkalian harga dengan jumlah menggunakan `return`.
+
+**Ketentuan:**
+1. Jangan menggunakan `console.log()` di dalam fungsi untuk menggantikan `return`.
+2. Panggil fungsi dengan harga `250000` dan jumlah `2`.
+3. Simpan hasil pemanggilan fungsi ke dalam variabel.
+4. Tampilkan hasilnya di luar fungsi.
+
+**Pertanyaan:** Apa perbedaan nilai yang dikembalikan fungsi dengan nilai yang hanya ditampilkan menggunakan `console.log()`?
+
+## Tugas 2 — Scope dan Return
+
+Buat fungsi `hitungDiskon()` dengan ketentuan:
+
+1. Fungsi menerima parameter `totalBelanja`.
+2. Buat variabel lokal `diskon` di dalam fungsi.
+3. Jika total belanja minimal Rp500.000, diskon sebesar 10%; jika tidak, diskon 0%.
+4. Kembalikan nominal diskon, bukan persentasenya.
+5. Tampilkan nominal diskon dari luar fungsi.
+
+**Uji dengan:**
+- Rp250.000
+- Rp500.000
+- Rp1.000.000
+
+**Pertanyaan:** Apakah variabel `diskon` dapat diakses langsung dari luar fungsi? Jelaskan alasannya.
+
+## Tugas 3 — Callback Function
+
+Buat fungsi `prosesTransaksi()` yang menerima dua parameter:
+
+- `subtotal`
+- `callback`
+
+Fungsi tersebut harus mengirimkan nilai `subtotal` ke callback untuk diproses.
+
+Buat callback bernama `tampilkanHasil()` yang menerima nilai dan menampilkannya ke console.
+
+**Ketentuan:**
+1. Panggil `prosesTransaksi()` dengan subtotal `500000`.
+2. Kirim fungsi `tampilkanHasil` sebagai callback.
+3. Jangan memanggil callback secara langsung di luar `prosesTransaksi()` untuk menyelesaikan tugas ini.
+
+**Pertanyaan:** Mengapa fungsi callback dikirim tanpa tanda kurung saat diberikan sebagai argumen?
+
+## Tugas 4 — `forEach()` dan Callback
+
+Gunakan array `transaksi`.
+
+Tampilkan informasi setiap transaksi menggunakan `forEach()` dengan format:
+
+`Transaksi #1 — Keyboard — Subtotal: Rp500000`
+
+**Ketentuan:**
+1. Buat fungsi callback terpisah, bukan langsung menggunakan arrow function.
+2. Gunakan `hitungSubtotal()` dari Tugas 1 untuk menghitung subtotal.
+3. Tampilkan seluruh transaksi.
+4. Jangan membuat array baru dari hasil callback `forEach()`.
+
+**Pertanyaan:** Apa yang dikembalikan oleh pemanggilan `forEach()`? Mengapa hasilnya tidak bisa digunakan sebagai array subtotal?
+
+## Tugas 5 — `map()`
+
+Gunakan array `transaksi` untuk membuat array baru bernama `dataSubtotal`.
+
+Setiap elemen harus berupa objek dengan struktur:
+
+```js
+{
+    id: 1,
+    produk: "Keyboard",
+    subtotal: 500000
+}
+```
+
+**Ketentuan:**
+1. Gunakan `map()`.
+2. Hitung subtotal menggunakan `hitungSubtotal()`.
+3. Jangan mengubah array `transaksi` asli.
+4. Tampilkan array hasilnya.
+
+**Pertanyaan:** Apa perbedaan hasil penggunaan `map()` dengan `forEach()` pada kasus ini?
+
+## Tugas 6 — `filter()`
+
+Buat tiga array baru:
+
+1. `transaksiLunas`: hanya transaksi dengan status `"lunas"`.
+2. `transaksiMahal`: hanya transaksi dengan subtotal minimal Rp500.000.
+3. `transaksiBelumLunas`: hanya transaksi dengan status `"belum lunas"` dan jumlah barang minimal 2.
+
+**Ketentuan:**
+- Gunakan `filter()`.
+- Jangan mengubah array asli.
+- Gunakan kondisi yang tepat untuk setiap filter.
+- Untuk kondisi subtotal, gunakan `hitungSubtotal()`.
+
+**Pertanyaan:** Mengapa `filter()` cocok untuk tugas ini, bukan `map()`?
+
+## Tugas 7 — `find()` dan `findIndex()`
+
+Cari transaksi pertama yang memenuhi setiap kondisi berikut:
+
+1. Produk bernama `"Mouse"` menggunakan `find()`.
+2. Produk dengan subtotal minimal Rp1.000.000 menggunakan `find()`.
+3. Indeks transaksi dengan ID `5` menggunakan `findIndex()`.
+4. Indeks transaksi dengan ID `99` menggunakan `findIndex()`.
+
+**Pertanyaan:** Apa hasil ketika `find()` tidak menemukan data? Apa hasil ketika `findIndex()` tidak menemukan data?
+
+## Tugas 8 — `findLast()` dan `findLastIndex()`
+
+Cari data dari arah belakang array:
+
+1. Transaksi terakhir yang produknya `"Keyboard"` menggunakan `findLast()`.
+2. Indeks transaksi terakhir yang statusnya `"belum lunas"` menggunakan `findLastIndex()`.
+3. Indeks transaksi terakhir yang produknya `"Laptop"` menggunakan `findLastIndex()`.
+
+**Pertanyaan:** Apa perbedaan cara pencarian `find()` dan `findLast()`?
+
+## Tugas 9 — `setTimeout()` dan Callback Asynchronous
+
+Buat fungsi `prosesPembayaran()` yang menerima sebuah callback.
+
+Ketika dipanggil, fungsi harus:
+
+1. Menampilkan `"Memproses pembayaran..."`.
+2. Menggunakan `setTimeout()` untuk menunggu 2 detik.
+3. Setelah 2 detik, menampilkan `"Pembayaran berhasil!"`.
+4. Menjalankan callback setelah pesan pembayaran berhasil ditampilkan.
+
+Buat callback terpisah bernama `kirimNotifikasi()` yang menampilkan `"Notifikasi dikirim."`.
+
+**Pertanyaan:** Mengapa pesan `"Notifikasi dikirim."` baru muncul setelah penundaan selesai?
+
+## Tugas 10 — Challenge Integrasi
+
+Buat fungsi `laporanPenjualan()` yang menerima array transaksi sebagai parameter.
+
+Fungsi harus:
+
+1. Menampilkan seluruh transaksi beserta subtotalnya menggunakan `forEach()`.
+2. Membuat array baru berisi produk, ID, dan subtotal menggunakan `map()`.
+3. Membuat array transaksi lunas menggunakan `filter()`.
+4. Mencari transaksi dengan subtotal terbesar menggunakan metode array yang sudah dipelajari.
+5. Mencari transaksi terakhir yang belum lunas.
+6. Mengembalikan objek laporan menggunakan `return`, dengan struktur yang kamu tentukan sendiri dan jelas.
+
+Panggil fungsi dengan array `transaksi`, simpan hasilnya ke variabel, lalu tampilkan hasil laporan tersebut.
+
+**Batasan:**
+- Jangan menggunakan `reduce()`, `sort()`, atau perulangan `for`/`while`.
+- Gunakan fungsi `hitungSubtotal()` yang sudah dibuat.
+- Jangan mengubah array asli.
+- Pisahkan logika perhitungan dari logika menampilkan data sebisa mungkin.
+
+## Checklist Penyelesaian
+
+- [ ] Tugas 1 — Function, parameter, argument, return
+- [ ] Tugas 2 — Scope
+- [ ] Tugas 3 — Callback
+- [ ] Tugas 4 — `forEach()`
+- [ ] Tugas 5 — `map()`
+- [ ] Tugas 6 — `filter()`
+- [ ] Tugas 7 — `find()` dan `findIndex()`
+- [ ] Tugas 8 — `findLast()` dan `findLastIndex()`
+- [ ] Tugas 9 — `setTimeout()` dan callback asynchronous
+- [ ] Tugas 10 — Integrasi semua materi
+
+### Aturan pengerjaan
+
+1. Kerjakan tanpa melihat solusi dari internet atau AI.
+2. Jika buntu, tulis dulu apa yang kamu pahami dan bagian mana yang belum dipahami.
+3. Jika kode error, jangan langsung menghapus atau mengganti semuanya. Cari penyebabnya.
+4. Catat kesalahan konsep yang muncul di bagian **My Problem**.
+5. Setelah selesai, uji kode dan jelaskan alasan kamu memilih setiap metode.
+
+**Kriteria berhasil:** kode berjalan, hasilnya benar, kamu bisa menjelaskan alasan setiap metode digunakan, dan kamu mampu menulis ulang logikanya tanpa menyalin jawaban.

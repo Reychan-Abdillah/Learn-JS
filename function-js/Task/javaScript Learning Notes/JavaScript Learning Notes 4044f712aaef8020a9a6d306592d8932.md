@@ -1,19 +1,15 @@
 # JavaScript Learning Notes
 
-<aside>
-📅
+# JavaScript Fundamentals
 
-*D: 25-10-2026*
-
-</aside>
+📅 **D: 25-10-2026**
 
 ## 1. Function dan Parameter
 
-Function adalah sekumpulan instruksi yang dibuat untuk menjalankan tugas tertentu dan dapat digunakan kembali dengan cara dipanggil.
+Function adalah sekumpulan instruksi untuk menjalankan tugas tertentu dan dapat digunakan kembali dengan cara dipanggil.
 
-Function dapat menerima data melalui **parameter**, sedangkan nilai yang diberikan saat function dipanggil disebut **argumen**.
-
-### Contoh
+- **Parameter:** variabel yang ditentukan saat function dibuat untuk menerima argumen.
+- **Argumen:** nilai yang diberikan saat function dipanggil.
 
 ```
 function tambahAngka(a, b) {
@@ -23,18 +19,15 @@ function tambahAngka(a, b) {
 tambahAngka(5, 3);
 ```
 
-- `a` dan `b` = parameter.
-- `5` dan `3` = argumen.
+`a` dan `b` adalah parameter, sedangkan `5` dan `3` adalah argumen.
 
-**Penulisan nama function:** umumnya menggunakan `camelCase`, diawali huruf kecil, tanpa spasi.
+Nama function umumnya menggunakan `camelCase`, diawali huruf kecil, dan tanpa spasi.
 
-Contoh: `tambahAngka()`, `hitungTotal()`, `tampilkanHarga()`.
+Contoh: `tambahAngka()`, `hitungTotal()`.
 
 ## 2. Return dalam Function
 
-`return` berfungsi untuk mengembalikan nilai dari function agar dapat disimpan ke variabel atau digunakan kembali.
-
-### Contoh
+`return` mengembalikan nilai dari function agar dapat disimpan atau digunakan kembali.
 
 ```
 function tambah(a, b) {
@@ -42,10 +35,11 @@ function tambah(a, b) {
 }
 
 const hasil = tambah(5, 3);
+
 console.log(hasil); // 8
 ```
 
-Tanpa `return`, function yang tidak mengembalikan nilai secara eksplisit akan menghasilkan `undefined`.
+Jika function tidak mengembalikan nilai menggunakan `return`, hasil pemanggilannya adalah `undefined`.
 
 ```
 function tambah(a, b) {
@@ -59,30 +53,15 @@ console.log(hasil);
 // undefined
 ```
 
-<aside>
-💡
-
-**Ingat:** `console.log()` menampilkan nilai di console, sedangkan `return` mengembalikan nilai dari function. Keduanya memiliki fungsi berbeda.
-
-</aside>
+`console.log()` menampilkan nilai di console, sedangkan `return` mengembalikan nilai dari function.
 
 ## 3. Scope
 
 Scope adalah aturan yang menentukan di mana suatu variabel dapat diakses.
 
-Scope membantu membatasi akses variabel dan menghindari konflik nama variabel.
-
-### Global / Scope Luar
-
-Variabel yang dideklarasikan di luar function dapat diakses dari dalam function jika berada dalam cakupan yang sesuai.
-
-### Local Scope
-
-Variabel yang dideklarasikan di dalam function hanya dapat diakses dari dalam function tersebut.
-
-Variabel yang dideklarasikan menggunakan `let` atau `const` di dalam block `{}` juga terbatas pada block tersebut.
-
-### Contoh
+- **Global scope:** variabel yang dideklarasikan di luar function dapat diakses dari bagian kode yang berada dalam cakupannya.
+- **Function scope:** variabel yang dideklarasikan di dalam function menggunakan `var`, `let`, atau `const` hanya dapat diakses di dalam function tersebut.
+- **Block scope:** variabel `let` dan `const` yang dideklarasikan di dalam block `{}` hanya dapat diakses di dalam block tersebut.
 
 ```
 let angka = 10;
@@ -96,13 +75,11 @@ console.log(tesScope()); // 20
 console.log(angka);      // 10
 ```
 
-Kedua variabel bernama `angka` berbeda karena berada di scope berbeda. Variabel lokal tidak mengubah variabel di luar function.
+Kedua variabel `angka` berbeda karena berada di scope yang berbeda.
 
 ## 4. Callback Function
 
-Callback function adalah function yang diberikan sebagai argumen kepada function lain, lalu dipanggil oleh function penerima.
-
-### Contoh
+Callback adalah function yang diberikan sebagai argumen kepada function lain, kemudian dipanggil oleh function penerima.
 
 ```
 function sapa(nama) {
@@ -113,49 +90,33 @@ function prosesUser(callback, nama) {
     return callback(nama);
 }
 
-prosesUser(sapa, "Reyhan");
+prosesUser(sapa, "Reychan");
 ```
 
-### Output
+Output:
 
 ```
-Halo Reyhan
+Halo Reychan
 ```
-
-### Penjelasan
 
 - `sapa` adalah function yang dikirim sebagai callback.
-- `callback` adalah parameter yang menerima function tersebut.
-- `callback(nama)` menjalankan callback dengan argumen `nama`.
+- `callback` adalah parameter yang menerima function.
+- `callback(nama)` menjalankan function tersebut.
 
-**Mengapa `sapa` tidak menggunakan tanda kurung?**
+**Perbedaan `sapa` dan `sapa()`:**
 
-```
-prosesUser(sapa, "Reyhan");
-```
+- `sapa` merujuk pada function tanpa menjalankannya.
+- `sapa()` menjalankan function tersebut.
 
-Karena kita mengirim function-nya, bukan menjalankannya terlebih dahulu.
+Callback digunakan pada array methods seperti `map()` dan `forEach()`, serta pada proses asynchronous seperti `setTimeout()`.
 
-- `sapa` = referensi ke function.
-- `sapa()` = menjalankan function.
+Callback tidak selalu asynchronous. Callback pada `map()` dan `forEach()` dijalankan secara synchronous pada penggunaan biasa.
 
-### Kapan Callback Digunakan?
-
-- **Array methods:** seperti `forEach()`, `map()`, dan `filter()`.
-- **Asynchronous programming:** seperti `setTimeout()` dan callback dalam proses pengambilan data.
-
-<aside>
-📝
-
-Catatan: callback tidak selalu asynchronous. Callback pada `forEach()` dan `map()` dijalankan secara synchronous.
-
-</aside>
-
-## 5. `map()` dan `forEach()`
+## 5. Array Methods
 
 ### `map()`
 
-`map()` digunakan untuk mengolah setiap elemen array dan menghasilkan **array baru** dari nilai yang dikembalikan callback. Array asli tidak diubah oleh `map()` itu sendiri.
+Mengolah setiap elemen array dan menghasilkan array baru dari nilai yang dikembalikan callback.
 
 ```
 const angka = [1, 2, 3];
@@ -168,9 +129,33 @@ console.log(hasil); // [2, 4, 6]
 console.log(angka); // [1, 2, 3]
 ```
 
+### `filter()`
+
+Menghasilkan array baru yang berisi elemen-elemen yang memenuhi kondisi.
+
+```
+const angka = [10, 15, 20, 25];
+
+const hasil = angka.filter(item => item >= 20);
+
+console.log(hasil); // [20, 25]
+```
+
+### `find()`
+
+Mengembalikan elemen pertama yang memenuhi kondisi. Jika tidak ditemukan, hasilnya `undefined`.
+
+```
+const angka = [10, 15, 20, 25];
+
+const hasil = angka.find(item => item >= 20);
+
+console.log(hasil); // 20
+```
+
 ### `forEach()`
 
-`forEach()` digunakan untuk menjalankan callback pada setiap elemen array. Method ini tidak menghasilkan array baru dari nilai yang dikembalikan callback.
+Menjalankan callback untuk setiap elemen array. Tidak menghasilkan array baru dan nilai kembaliannya adalah `undefined`.
 
 ```
 const harga = [10000, 20000, 30000];
@@ -182,9 +167,7 @@ function tampilkanHarga(item) {
 harga.forEach(tampilkanHarga);
 ```
 
-`forEach()` otomatis mengirimkan setiap elemen array sebagai argumen ke callback.
-
-### Output
+Output:
 
 ```
 10000
@@ -192,49 +175,134 @@ harga.forEach(tampilkanHarga);
 30000
 ```
 
-**Perbedaan utama:**
+`forEach()` memberikan setiap elemen array sebagai argumen kepada callback.
 
-- `map()` = mengolah elemen dan menghasilkan array baru.
-- `forEach()` = menjalankan callback untuk setiap elemen, biasanya untuk melakukan suatu tindakan.
+### `reduce()`
 
-## 6. Array Methods: `find`, `findIndex`, `findLast`, `findLastIndex`
-
-Keempat method digunakan untuk mencari elemen array berdasarkan kondisi yang ditentukan oleh callback.
-
-- **`find()`**: mengembalikan nilai elemen pertama yang cocok, dari kiri ke kanan.
-- **`findIndex()`**: mengembalikan index elemen pertama yang cocok, dari kiri ke kanan.
-- **`findLast()`**: mengembalikan nilai elemen pertama yang cocok saat pencarian dari kanan ke kiri.
-- **`findLastIndex()`**: mengembalikan index elemen pertama yang cocok saat pencarian dari kanan ke kiri.
-
-### Contoh
+Mengakumulasi elemen array hingga menghasilkan satu nilai akhir. Hasilnya bisa berupa angka, string, object, atau array, tergantung proses akumulasinya.
 
 ```
-const angka = [10, 20, 30, 20];
+const angka = [1, 2, 3, 4, 5];
 
-console.log(angka.find(n => n === 20));          // 20
-console.log(angka.findIndex(n => n === 20));     // 1
-console.log(angka.findLast(n => n === 20));      // 20
-console.log(angka.findLastIndex(n => n === 20)); // 3
+const total = angka.reduce((acc, item) => {
+    return acc + item;
+}, 0);
+
+console.log(total); // 15
 ```
 
-### Perbedaan Penting
+- `acc` adalah accumulator, yaitu nilai hasil akumulasi sementara.
+- `item` adalah elemen yang sedang diproses.
+- `0` adalah nilai awal accumulator.
 
-- `find()` dan `findLast()` mengembalikan **nilai elemen**.
-- `findIndex()` dan `findLastIndex()` mengembalikan **index elemen**.
-- Jika tidak ada elemen yang cocok:
-    - `find()` dan `findLast()` mengembalikan `undefined`.
-    - `findIndex()` dan `findLastIndex()` mengembalikan `1`.
+Pada setiap iterasi, nilai yang dikembalikan callback menjadi nilai `acc` untuk iterasi berikutnya.
 
-### Cara Mudah Mengingat
+## 6. Destructuring
 
-- `find` = cari nilai dari kiri.
-- `findIndex` = cari index dari kiri.
-- `findLast` = cari nilai dari kanan.
-- `findLastIndex` = cari index dari kanan.
+Destructuring digunakan untuk mengambil nilai dari array atau properti object langsung ke variabel.
 
-<aside>
-📌
+### Array Destructuring
 
-**Catatan:** index array dimulai dari `0`, bukan `1`.
+```
+const buah = ["Apel", "Mangga", "Jeruk"];
 
-</aside>
+const [buahPertama, buahKedua] = buah;
+
+console.log(buahPertama); // Apel
+console.log(buahKedua);   // Mangga
+```
+
+Nilai diambil berdasarkan posisi elemen array.
+
+### Object Destructuring
+
+```
+const user = {
+    nama: "Reychan",
+    umur: 19
+};
+
+const { nama, umur } = user;
+
+console.log(nama); // Reychan
+console.log(umur); // 19
+```
+
+Pada object destructuring, nama variabel mengikuti nama properti secara default.
+
+## 7. Spread Operator (`...`)
+
+Spread digunakan untuk membentangkan elemen array atau properti object ke dalam konteks lain.
+
+### Spread pada Array
+
+```
+const angkaPertama = [1, 2, 3];
+const angkaKedua = [...angkaPertama, 4, 5];
+
+console.log(angkaKedua); // [1, 2, 3, 4, 5]
+```
+
+### Spread pada Object
+
+```
+const user = {
+    nama: "Reychan",
+    umur: 19
+};
+
+const userBaru = {
+    ...user,
+    umur: 20
+};
+
+console.log(userBaru);
+// { nama: "Reychan", umur: 20 }
+```
+
+Properti `umur` menjadi `20` karena nilai yang ditulis belakangan menggantikan nilai sebelumnya, sedangkan properti lain disalin dari `user`.
+
+Spread pada array atau object menghasilkan salinan dangkal (*shallow copy*). Jika terdapat object atau array bersarang, referensi di dalamnya masih dapat digunakan bersama oleh salinan dan data asli.
+
+## 8. Rest Parameter (`...`)
+
+Rest parameter digunakan untuk mengumpulkan sejumlah argumen menjadi satu array. Ini berguna ketika jumlah argumen yang diterima function tidak tetap.
+
+```
+function perkenalan(nama, ...hobi) {
+    console.log("Nama:", nama);
+    console.log("Hobi:", hobi);
+}
+
+perkenalan("Reychan", "Coding", "Gaming", "Membaca");
+```
+
+Output:
+
+```
+Nama: Reychan
+Hobi: [ 'Coding', 'Gaming', 'Membaca' ]
+```
+
+`nama` menerima argumen pertama, sedangkan `...hobi` mengumpulkan argumen sisanya menjadi array.
+
+### Rest dengan `reduce()`
+
+```
+function jumlahkan(...angka) {
+    return angka.reduce((total, item) => {
+        return total + item;
+    }, 0);
+}
+
+console.log(jumlahkan(10, 20));        // 30
+console.log(jumlahkan(10, 20, 30));    // 60
+console.log(jumlahkan(5, 10, 15, 20)); // 50
+```
+
+Rest parameter harus berada di posisi terakhir dalam daftar parameter function.
+
+## Perbedaan Spread dan Rest
+
+- **Spread:** membentangkan elemen array atau properti object.
+- **Rest:** mengumpulkan beberapa argumen menjadi satu array.
